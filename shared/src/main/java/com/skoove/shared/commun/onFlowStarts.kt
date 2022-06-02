@@ -20,9 +20,9 @@ fun <T> Flow<ApiResult<T>>.onFlowStarts() =
         }
 
 fun <T : Any> Flow<ApiResult<T>>.applyCommonSideEffects() =
-    retryWhen { cause, attempt ->
+    retryWhen { _, attempt ->
         when {
-            (cause is IOException && attempt < MAX_RETRIES) -> {
+            ( attempt < MAX_RETRIES) -> {
                 delay(getBackoffDelay(attempt))
                 true
             }
@@ -34,7 +34,6 @@ fun <T : Any> Flow<ApiResult<T>>.applyCommonSideEffects() =
 
 
 
-const val MAX_RETRIES = 3L
+private const val MAX_RETRIES = 3L
 private const val INITIAL_BACKOFF = 3000L
-
 private fun getBackoffDelay(attempt: Long) = INITIAL_BACKOFF * (attempt + 1)

@@ -89,4 +89,7 @@ dependencies {
     androidTestImplementation(TestLibs.barista) {
         exclude group: TestLibs.excludeKotlin
     }
+
+    implementation Libs.navigation_fragment
+    implementation Libs.navigation_ui
 }

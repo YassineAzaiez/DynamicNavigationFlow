@@ -12,12 +12,12 @@ class MainFragment : BaseViewModelFragment<MainViewModel, FragmentMainBinding>(M
 
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
-       // viewModel.users()
+        viewModel.login()
     }
 
     override fun initObservers() {
         with(viewModel) {
-            observe(onGetUsers) {  }
+            observe(onLogin) {}
             observe(onError) { togglePopUp(it) }
         }
     }

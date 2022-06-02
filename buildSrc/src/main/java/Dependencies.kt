@@ -54,9 +54,11 @@ object Libs {
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
     const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
 
-    // Room
-    const val roomDb = "androidx.room:room-runtime:${Versions.room}"
-    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    //Navigation
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navVersion}"
+    const val navigation_ui =  "androidx.navigation:navigation-ui-ktx:${Versions.navVersion}"
+
+
 
 
 }

@@ -18,8 +18,6 @@ object Versions {
     const val retrofit = "2.9.0"
     const val okhttp = "4.7.2"
     const val stetho = "1.5.1"
-    const val room = "2.4.0"
-
 
     const val junit = "4.13"
     const val testCoreRunner = "1.2.0"
@@ -30,5 +28,6 @@ object Versions {
     const val androidxJunit = "1.1.1"
     const val fragmentTesting = "1.2.5"
     const val robolectric = "4.3.1"
+    const val navVersion = "2.3.5"
 
 }

@@ -15,7 +15,7 @@ class AppRemoteDataSourceImpl(
         try {
             val result = apiService.login()
             if (result.isSuccessful) {
-                ApiResult.Success(result.body()?:"")
+                ApiResult.Success(result.body()?.sessionId?:"")
             } else {
                 ApiResult.Error(DataSourceException.Server(result.errorBody()))
             }

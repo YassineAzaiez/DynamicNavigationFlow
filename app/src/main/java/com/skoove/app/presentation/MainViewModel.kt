@@ -9,13 +9,12 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val getUsersUseCase: LoginUseCase,
+    private val loginUseCase: LoginUseCase,
     @IoDispatcher ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel(ioDispatcher) {
 
-    private val _onGetUsers = MutableLiveData<List<String>>()
-    val onGetUsers: LiveData<List<String>>
-        get() = _onGetUsers
-
-//    fun users() { executeUseCase(getUsersUseCase) { _onGetUsers.postValue(it) } }
+    private val _onLogin = MutableLiveData<String>()
+    val onLogin: LiveData<String>
+        get() = _onLogin
+    fun login() { executeUseCase(loginUseCase) { _onLogin.postValue(it) } }
 }

@@ -58,9 +58,6 @@ dependencies {
     api Libs.dagger
     kapt Libs.daggerCompiler
 
-    api Libs.roomDb
-    kapt Libs.roomCompiler
-
     api Libs.lifecycleExtension
     api Libs.lifecycleViewModel
     api Libs.lifecycleRuntime

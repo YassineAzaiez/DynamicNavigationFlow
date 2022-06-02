@@ -38,7 +38,6 @@ object NetworkModule {
     @Singleton
     fun providesOkHttpClient(cache: Cache): OkHttpClient {
         val client = OkHttpClient.Builder()
-            .addNetworkInterceptor(networkCashInterceptor())
             .cache(cache)
             .connectTimeout(CONNECT_TIMEOUT.toLong(), TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
@@ -64,24 +63,5 @@ object NetworkModule {
         return interceptor
     }
 
-
-    /**
-     * This interceptor will be called ONLY if the network is available
-     */
-    private fun networkCashInterceptor(): Interceptor {
-        return object : Interceptor {
-            override fun intercept(chain: Interceptor.Chain): Response {
-
-
-
-                val requestBuilder = chain.request().newBuilder()
-                    .addHeader(APP_ID, "6292af0330a12db0baa4377a")
-                    .build()
-                return chain.proceed(requestBuilder)
-
-            }
-
-        }
-    }
 
 }

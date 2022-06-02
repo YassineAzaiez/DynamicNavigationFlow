@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath ProjectDependencies.gradle
         classpath ProjectDependencies.kotlinGradle
+        classpath 'com.android.tools.build:gradle:4.0.1'
     }
 }
 

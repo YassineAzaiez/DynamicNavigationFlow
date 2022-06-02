@@ -1,5 +1,6 @@
 package com.skoove.app.api
 
+import com.skoove.app.domain.responses.LoginResponse
 import com.skoove.shared.utils.FETCH_EXPERIMENTS
 import com.skoove.shared.utils.LOGIN
 import com.skoove.shared.utils.SUBMIT_SELECTION
@@ -9,7 +10,7 @@ import retrofit2.http.GET
 interface AppApiService {
 
     @GET(LOGIN)
-    suspend fun login(): Response<String>
+    suspend fun login(): Response<LoginResponse>
 
     @GET(FETCH_EXPERIMENTS)
     suspend fun fetchExperiments(): Response<String>
