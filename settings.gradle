@@ -1,0 +1,4 @@
+include ':shared'
+include ':BuildSrc'
+include ':app'
+rootProject.name = "Android Template"

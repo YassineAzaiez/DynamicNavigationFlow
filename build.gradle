@@ -1,0 +1,25 @@
+buildscript {
+    ext {
+        kotlin_version = Versions.kotlin
+    }
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath ProjectDependencies.gradle
+        classpath ProjectDependencies.kotlinGradle
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

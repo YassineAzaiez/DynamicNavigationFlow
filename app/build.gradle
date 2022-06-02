@@ -1,0 +1,92 @@
+apply plugin: Plugins.androidApplications
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinExtensions
+apply plugin: Plugins.kotlinKapt
+
+android {
+    compileSdkVersion DefaultConfig.compileSdk
+    buildToolsVersion DefaultConfig.buildTools
+
+    defaultConfig {
+        applicationId DefaultConfig.applicationId
+        minSdkVersion DefaultConfig.minSdk
+        targetSdkVersion DefaultConfig.targetSdk
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "mode"
+    productFlavors {
+        development {
+            dimension "mode"
+            resValue "string", "app_name", APPLICATION_NAME + "\" DEV\""
+        }
+        staging {
+            dimension "mode"
+            resValue "string", "app_name", APPLICATION_NAME + "\" STAGING\""
+        }
+        production {
+            dimension "mode"
+            resValue "string", "app_name", APPLICATION_NAME
+        }
+    }
+
+
+
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def flavor = variant.flavorName
+            def apk_name = APPLICATION_NAME
+            outputFileName = "${apk_name}-${flavor}.apk"
+        }
+    }
+
+
+    buildTypes {
+        debug {
+            debuggable = true
+            multiDexEnabled true
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(Modules.shared)
+    kapt Libs.daggerCompiler
+
+
+    testImplementation TestLibs.junit
+    testImplementation TestLibs.androidxJunit
+    testImplementation TestLibs.googleTruth
+    testImplementation TestLibs.coreTesting
+    testImplementation TestLibs.coroutineTest
+    testImplementation TestLibs.robolectric
+
+    debugImplementation TestLibs.fragmentTests
+    androidTestImplementation TestLibs.androidxJunitExtension
+    androidTestImplementation TestLibs.testRunner
+    androidTestImplementation TestLibs.espresso
+    androidTestImplementation(TestLibs.barista) {
+        exclude group: TestLibs.excludeKotlin
+    }
+}

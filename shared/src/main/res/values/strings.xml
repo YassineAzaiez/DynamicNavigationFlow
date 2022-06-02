@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="CommonErrorNetwork">Please check your Internet Connection.</string>
+    <string name="CommonDone">Done</string>
+    <string name="CommonCancel">Cancel</string>
+    <string name="CommonBaseDialogConfirmBtn">Confirm</string>
+    <string name="errorUnexpectedMessage">Something went wrong, please try again.</string>
+    <string name="errorNetwork">Please check your Internet Connection.</string>
+    <string name="errorBodyNull">response body is null</string>
+    <string name="CommonErrorUnexpectedMessage">Something went wrong, please try again.</string>
+    <string name="CommonErrorServerMessage">Sorry about this !  There is a problem on the server side</string>
+    <string name="select_capture_image">Please select or capture image</string>
+</resources>

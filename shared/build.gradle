@@ -1,0 +1,88 @@
+apply plugin: Plugins.androidLibrary
+apply plugin: Plugins.kotlinAndroid
+apply plugin: Plugins.kotlinExtensions
+apply plugin: Plugins.kotlinKapt
+
+android {
+    compileSdkVersion DefaultConfig.compileSdk
+    buildToolsVersion DefaultConfig.buildTools
+
+    defaultConfig {
+        minSdkVersion DefaultConfig.minSdk
+        targetSdkVersion DefaultConfig.targetSdk
+        versionCode Releases.versionCode
+        versionName Releases.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions "mode"
+    productFlavors {
+        development {
+            dimension "mode"
+            buildConfigField "String", "BASE_URL", BASE_URL
+            resValue "string", "app_name", APPLICATION_NAME + "\" DEV\""
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    api Libs.kotlin
+
+    api Libs.appCompact
+    api Libs.fragment
+    api Libs.ktx
+    api Libs.cardview
+    api Libs.recyclerView
+    api Libs.constraintLayout
+    api Libs.materialDesign
+
+    api Libs.dagger
+    kapt Libs.daggerCompiler
+
+    api Libs.roomDb
+    kapt Libs.roomCompiler
+
+    api Libs.lifecycleExtension
+    api Libs.lifecycleViewModel
+    api Libs.lifecycleRuntime
+
+    api Libs.coroutinesCore
+    api Libs.coroutinesAndroid
+
+    api Libs.timber
+
+    api Libs.coil
+
+    api Libs.gson
+
+    api Libs.securityEncryption
+
+    api Libs.retrofit
+    api Libs.retrofitConverter
+
+    api Libs.okhttp
+    api Libs.okHttpInterceptor
+
+    api Libs.stetho
+    api Libs.stethoOkHttp
+
+}
