@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidTemplate"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.skoove.app.presentation.MainActivity">
+        <activity android:name="com.skoove.app.presentation.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

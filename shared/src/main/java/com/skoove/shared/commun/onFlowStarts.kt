@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.retryWhen
+import retrofit2.HttpException
 import java.io.IOException
 
 
@@ -20,9 +21,9 @@ fun <T> Flow<ApiResult<T>>.onFlowStarts() =
         }
 
 fun <T : Any> Flow<ApiResult<T>>.applyCommonSideEffects() =
-    retryWhen { _, attempt ->
+    retryWhen { cause, attempt ->
         when {
-            ( attempt < MAX_RETRIES) -> {
+            (cause is HttpException && attempt < MAX_RETRIES) -> {
                 delay(getBackoffDelay(attempt))
                 true
             }
