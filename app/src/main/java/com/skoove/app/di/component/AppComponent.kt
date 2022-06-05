@@ -7,6 +7,7 @@ import com.skoove.app.di.scope.AppScope
 import com.skoove.app.presentation.LauncherActivity
 import com.skoove.app.presentation.screenA.ScreenAFragment
 import com.skoove.app.presentation.screenBx.ScreenBXFragment
+import com.skoove.app.presentation.screenCx.ScreenCXFragment
 import com.skoove.shared.di.component.SharedComponent
 import dagger.Component
 
@@ -20,6 +21,7 @@ interface AppComponent {
     fun inject(launcherActivity: LauncherActivity)
     fun inject(screenAFragment: ScreenAFragment)
     fun inject(screenBXFragment: ScreenBXFragment)
+    fun inject(screenBXFragment: ScreenCXFragment)
 
 
 

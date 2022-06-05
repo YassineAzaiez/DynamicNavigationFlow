@@ -19,8 +19,8 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
     ScreenBxViewModel::class.java,
     FragmentScreenbxBinding::inflate
 ) {
-    private var optionsList = mutableListOf<ChoicesModel>()
     private var validate = false
+    private var action = -1
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
         ToolbarShared.getInstance().updateTitle(sharedPreferences.lastFetchExperiment)
@@ -29,36 +29,38 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
 
     private fun setUpViews() {
 
-        binding.ivNext.setOnClickListener {
-          //  if(validate) findNavController().navigate()
-        }
-
         with(binding) {
             when (sharedPreferences.lastFetchExperiment) {
                 ScreenBX.SCREENB1.destination -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_F9EBC8))
-                    optionsList = getChoicesList()
-                    initOptions(optionsList)
+                    initOptions(getChoicesList())
                     rvOptions.show()
+                    action = R.id.action_ScreenB1Fragment_to_ScreenC1Fragment
                     tvScreenB3Content.hide()
                 }
                 ScreenBX.SCREENB2.destination -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_FFEE63))
-                    optionsList = getOptionsList()
-                    initOptions(optionsList)
+                    initOptions(getOptionsList())
                     rvOptions.show()
+                    action = R.id.action_ScreenB2Fragment_to_ScreenC2Fragment
                     tvScreenB3Content.hide()
                 }
 
-                ScreenBX.SCREENB2.destination -> {
+                ScreenBX.SCREENB3.destination -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_ADE498))
                     rvOptions.hide()
                     tvScreenB3Content.show()
+                    validate = true
+                    action = R.id.action_ScreenB2Fragment_to_ScreenC2Fragment
                     tvScreenB3Content.text = getString(R.string.screenB3Content)
                 }
 
 
             }
+        }
+
+        binding.ivNext.setOnClickListener {
+            if(validate) viewModel.submitSelection(action)
         }
     }
 

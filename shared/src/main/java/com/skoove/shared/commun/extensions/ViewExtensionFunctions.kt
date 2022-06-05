@@ -1,8 +1,11 @@
 package com.skoove.shared.commun.extensions
 
 
+import android.content.Context
 import android.view.View
 import android.widget.EditText
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -27,5 +30,5 @@ fun View.hide() {
     visibility = View.GONE
 }
 
-fun EditText.value() = text.toString().trim()
+
 

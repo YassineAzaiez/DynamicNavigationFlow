@@ -1,12 +1,6 @@
 package com.skoove.shared.utils
 
-//NETWORK HEADERS CONSTANT
-const val TOKEN = "Authorization"
-const val ACCEPT = "accept"
-const val ACCEPT_JSON_VALUE = "application/json"
-const val BEARER = "bearer"
-const val METHOD_POST = "POST"
-const val APP_ID = "app-id"
+const val UNEXPECTED_ERROR_MSG = "Something went wrong , try again later."
 
 
 const val LOGIN = "/rLogin"

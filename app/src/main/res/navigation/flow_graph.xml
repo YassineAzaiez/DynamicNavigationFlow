@@ -25,7 +25,7 @@
             android:id="@+id/action_ScreenB1Fragment_to_ScreenC1Fragment"
             app:destination="@id/ScreenC1Fragment" />
         <action
-            android:id="@+id/action_ScreenBXFragment_to_ScreenC2Fragment"
+            android:id="@+id/action_ScreenB2Fragment_to_ScreenC2Fragment"
             app:destination="@id/ScreenC2Fragment" />
     </fragment>
 

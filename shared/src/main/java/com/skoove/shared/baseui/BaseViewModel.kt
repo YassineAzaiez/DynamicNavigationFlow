@@ -8,6 +8,7 @@ import com.skoove.shared.commun.ApiResult
 import com.skoove.shared.commun.ApiResult.Success
 import com.skoove.shared.commundomain.BaseUseCase
 import com.skoove.shared.di.qualifier.IoDispatcher
+import com.skoove.shared.utils.UNEXPECTED_ERROR_MSG
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -25,14 +26,14 @@ open class BaseViewModel @Inject constructor(
     val onError: LiveData<String> = _onError
 
     private fun showError(message: String?) {
-        _onError.postValue( message)
+        _onError.postValue(message)
     }
 
     private fun showLoadingToggle(visible: Boolean) = _toggleLoading.postValue(visible)
 
     private fun onFailure(msg: String?) {
         showLoadingToggle(false)
-        showError(msg)
+        showError(msg ?: UNEXPECTED_ERROR_MSG)
     }
 
     private fun <T> onSuccess(item: T, onAction: (T) -> Unit) {
@@ -40,13 +41,19 @@ open class BaseViewModel @Inject constructor(
         onAction(item)
     }
 
-    protected fun <T> executeUseCase(useCase: BaseUseCase<Flow<ApiResult<T>>>, onResult: (T) -> Unit) {
+    protected fun <T> executeUseCase(
+        useCase: BaseUseCase<Flow<ApiResult<T>>>,
+        onResult: (T) -> Unit
+    ) {
         showLoadingToggle(true)
         viewModelScope.launch(ioDispatcher) {
             useCase().collect { response ->
                 when (response) {
-                    is Success -> { onSuccess(response.data) { onResult(it) } }
-                    is ApiResult.Error -> onFailure(response.exception.message)
+                    is Success -> {
+                        onSuccess(response.data) { onResult(it) }
+                    }
+                    is ApiResult.Error ->
+                        onFailure(response.exception.message)
                 }
             }
 
