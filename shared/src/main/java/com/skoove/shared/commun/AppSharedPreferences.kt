@@ -34,7 +34,7 @@ class AppSharedPreferences(context: Context) {
         set(value) = prefs.value.edit { putString(KEY_LAST_FETCH_EXPERIMENTS, value) }
 
     var isFirstLaunch: Boolean
-        get() = prefs.value.getBoolean(KEY_IS_FIRST_LAUNCH, false)
+        get() = prefs.value.getBoolean(KEY_IS_FIRST_LAUNCH, true)
         set(value) = prefs.value.edit { putBoolean(KEY_IS_FIRST_LAUNCH, value) }
 
 

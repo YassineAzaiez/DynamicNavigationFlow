@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 interface AppRepository {
     suspend fun login(): Flow<ApiResult<String>>
     suspend fun fetchExperiments(): Flow<ApiResult<String>>
-    suspend fun submitSelection(): Flow<ApiResult<Unit?>>
+    suspend fun submitSelection(): Flow<ApiResult<Boolean>>
 
 }

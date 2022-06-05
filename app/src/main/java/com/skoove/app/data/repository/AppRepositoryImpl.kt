@@ -52,7 +52,7 @@ class AppRepositoryImpl(
         appRemoteDataSource.submitSelection().run {
             when (this) {
                 is ApiResult.Success -> {
-                    emit(ApiResult.Success(data))
+                    emit(ApiResult.Success(true))
                 }
 
                 is ApiResult.Error -> {

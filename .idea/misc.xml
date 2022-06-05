@@ -4,8 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/yassine.azaiez/Desktop/android_temp/shared/src/main/res/layout/component_error_popup.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/drawable/ic_checkbox.xml" value="0.1865" />
+        <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/drawable/ic_checkbox_unchecked.xml" value="0.1865" />
         <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/layout/activity_launcher.xml" value="0.20969202898550723" />
         <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/layout/fragment_screena.xml" value="0.12771739130434784" />
+        <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/layout/fragment_screenbx.xml" value="0.16" />
+        <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/app/src/main/res/layout/item_choice.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/yassine.azaiez/Desktop/coding challange/DynamicFlow/shared/src/main/res/drawable/background_radius_20.xml" value="0.168" />
         <entry key="..\:/users/yassine.azaiez/Desktop/github/Android-Template/app/src/main/res/layout/activity_main.xml" value="0.20104166666666667" />
         <entry key="..\:/users/yassine.azaiez/Desktop/github/Android-Template/app/src/main/res/layout/fragment_main.xml" value="0.20104166666666667" />
         <entry key="..\:/users/yassine.azaiez/Desktop/github/Android-Template/shared/src/main/res/layout/component_error_popup.xml" value="0.21784420289855072" />

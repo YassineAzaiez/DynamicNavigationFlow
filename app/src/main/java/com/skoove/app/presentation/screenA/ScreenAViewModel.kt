@@ -1,4 +1,4 @@
-package com.skoove.app.presentation.ScreenA
+package com.skoove.app.presentation.screenA
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

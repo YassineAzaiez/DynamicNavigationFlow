@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SubmitSelection @Inject constructor(private val appRepository: AppRepository) :
-    BaseUseCase<Flow<ApiResult<Unit?>>> {
+    BaseUseCase<Flow<ApiResult<Boolean>>> {
     override suspend fun invoke() = appRepository.submitSelection()
 }

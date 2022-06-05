@@ -1,14 +1,13 @@
-package com.skoove.app.presentation.ScreenA
+package com.skoove.app.presentation.screenA
 
 
 import androidx.navigation.fragment.findNavController
-import com.skoove.app.R
 import com.skoove.app.databinding.FragmentScreenaBinding
 import com.skoove.app.di.component.DependenciesInit
-import com.skoove.app.presentation.redirectTo
+import com.skoove.app.presentation.redirectToScreenBX
 import com.skoove.shared.baseui.BaseViewModelFragment
 import com.skoove.shared.commun.extensions.observe
-import com.skoove.shared.commundomain.ScreenBX.*
+
 
 class ScreenAFragment : BaseViewModelFragment<ScreenAViewModel, FragmentScreenaBinding>(
     ScreenAViewModel::class.java,
@@ -25,19 +24,20 @@ class ScreenAFragment : BaseViewModelFragment<ScreenAViewModel, FragmentScreenaB
         if (sharedPreferences.lastFetchExperiment.isEmpty())
             viewModel.fetchExperiments()
         else
-            findNavController().redirectTo(sharedPreferences.lastFetchExperiment)
+            navigateTo()
 
     override fun initObservers() {
         with(viewModel) {
             observe(onfetchExperiments) { screenName ->
                 sharedPreferences.lastFetchExperiment = screenName
-                findNavController().redirectTo(sharedPreferences.lastFetchExperiment)
+                navigateTo()
 
             }
             observe(onfetchExperiments) { togglePopUp(it) }
         }
     }
 
+    private fun navigateTo() =  findNavController().redirectToScreenBX(sharedPreferences.lastFetchExperiment)
 
 
 }

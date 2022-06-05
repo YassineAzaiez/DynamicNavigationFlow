@@ -1,6 +1,6 @@
 package com.skoove.app.api
 
-import com.skoove.app.domain.Models.LoginResponse
+import com.skoove.app.domain.models.LoginResponse
 import com.skoove.shared.utils.FETCH_EXPERIMENTS
 import com.skoove.shared.utils.LOGIN
 import com.skoove.shared.utils.SUBMIT_SELECTION

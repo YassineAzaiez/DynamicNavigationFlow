@@ -1,21 +1,20 @@
 package com.skoove.app.presentation
 
 
+
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import com.skoove.app.R
 import com.skoove.app.databinding.ActivityLauncherBinding
 import com.skoove.app.di.component.DependenciesInit
-import com.skoove.shared.commundomain.ScreenDataModel
 import com.skoove.shared.baseui.BaseViewModelActivity
 import com.skoove.shared.commun.extensions.observe
+import timber.log.Timber
 
 
 class LauncherActivity :
     BaseViewModelActivity<MainViewModel, ActivityLauncherBinding>(MainViewModel::class.java) {
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
     override fun initViewBinding() = ActivityLauncherBinding.inflate(layoutInflater)
 
@@ -32,8 +31,19 @@ class LauncherActivity :
             observe(onLogin) { sessionId ->
                 onLoginSuccess(sessionId)
             }
-            observe(onError) { togglePopUp(it) }
+            observe(onError) {
+                togglePopUp(it)
+            }
         }
+        ToolbarShared.getInstance().toolbarTitle.observe(this) {
+            updateToolbarTitle(it)
+        }
+    }
+
+    private fun updateToolbarTitle(title: String) {
+        Timber.d("updateToolbarTitle() - title  = $title")
+
+        binding.toolbarTitle.text = title
     }
 
     private fun onLoginSuccess(sessionId: String) {
@@ -44,11 +54,11 @@ class LauncherActivity :
     private fun redirect() {
         when {
             sharedPreferences.isFirstLaunch -> {
-                sharedPreferences.isFirstLaunch = true
+                sharedPreferences.isFirstLaunch = false
                 navController.navigate(R.id.ScreenAFragment)
             }
 
-            sharedPreferences.getScreensInList().isEmpty() -> navController.redirectTo(sharedPreferences.lastFetchExperiment)
+            sharedPreferences.lastFetchExperiment.isNotEmpty() -> navController.redirectToScreenBX(sharedPreferences.lastFetchExperiment)
 
         }
     }
@@ -59,9 +69,8 @@ class LauncherActivity :
                 ?: return
         navController = navHost.navController
 
-        navController.addOnDestinationChangedListener { _, dest, arguments ->
-            val screenData = ScreenDataModel(dest.label.toString(), arguments)
-            sharedPreferences.putScreeInList(screenData)
+        navController.addOnDestinationChangedListener { _, dest, _ ->
+            onNavigate(dest)
         }
     }
 
@@ -70,24 +79,19 @@ class LauncherActivity :
     //Pass the Ids of topLevel destinations in AppBarConfiguration
     private fun setupActionBar() {
         setSupportActionBar(binding.activityLauncherToolBar)
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.ScreenAFragment,
-                R.id.ScreenB1Fragment,
-                R.id.ScreenB2Fragment,
-                R.id.ScreenB3Fragment,
-                R.id.ScreenC1Fragment,
-                R.id.ScreenC2Fragment,
-                R.id.ScreenDFragment,
-
-                )
-
-        )
-
-
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+        }
     }
 
+
+
+    private fun onNavigate(dest: NavDestination) {
+        val title = dest.label as String?
+
+        title?.let {
+            ToolbarShared.getInstance().updateTitle(title)
+        }
+    }
 
 }
