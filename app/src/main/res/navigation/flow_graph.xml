@@ -3,18 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/flow_graph"
     app:startDestination="@id/ScreenAFragment">
-    <action
-        android:id="@+id/action_ScreenAFragment_to_ScreenCXFragment"
-        app:destination="@id/ScreenCXFragment" />
-    <action
-        android:id="@+id/action_ScreenAFragment_to_ScreenBXFragment"
-        app:destination="@id/ScreenBXFragment" />
+
 
     <fragment
         android:id="@+id/ScreenAFragment"
         android:name="com.skoove.app.presentation.screenA.ScreenAFragment"
-        android:label="ScreenA" >
+        android:label="ScreenA">
 
+        <action
+            android:id="@+id/action_ScreenAFragment_to_ScreenCXFragment"
+            app:destination="@id/ScreenCXFragment" />
+        <action
+            android:id="@+id/action_ScreenAFragment_to_ScreenBXFragment"
+            app:destination="@id/ScreenBXFragment" />
+        <action
+            android:id="@+id/action_ScreenCxFragment_to_ScreenDFragment"
+            app:destination="@id/ScreenDFragment" />
+        <action
+            android:id="@+id/action_ScreenBXFragment_to_ScreenCXFragment"
+            app:destination="@id/ScreenCXFragment" />
     </fragment>
     <fragment
         android:id="@+id/ScreenBXFragment"
@@ -26,24 +33,22 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/ScreenCXFragment"
-        android:name="com.skoove.app.presentation.screenCx.ScreenCXFragment"
-        >
-
+        android:name="com.skoove.app.presentation.screenCx.ScreenCXFragment" >
         <action
             android:id="@+id/action_ScreenCxFragment_to_ScreenDFragment"
             app:destination="@id/ScreenDFragment" />
+        <action
+            android:id="@+id/action_ScreenCXFragment_to_ScreenBXFragment"
+            app:destination="@id/ScreenBXFragment" />
     </fragment>
-
 
 
     <fragment
         android:id="@+id/ScreenDFragment"
         android:name="com.skoove.app.presentation.ScreenDFragment"
-        android:label="ScreenD" >
-    </fragment>
+        android:label="ScreenD" />
 
 
 </navigation>

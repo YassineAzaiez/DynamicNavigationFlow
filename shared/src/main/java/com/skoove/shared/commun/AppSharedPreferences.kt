@@ -43,6 +43,17 @@ class AppSharedPreferences(context: Context) {
         val type = object : TypeToken<MutableList<ScreenDataModel>>() {}.type
         return gson.fromJson(value, type) ?:  mutableListOf()
     }
+    fun restList() {
+        val list = getScreensInList()
+        list.clear()
+        val inString = gson.toJson(list)
+        prefs.value.edit().putString(KEY_LAST_OPENED_SCREEN_LIST, inString).apply()
+    }
+
+    fun clearFields() {
+        lastFetchExperiment = " "
+        restList()
+    }
 
     fun putScreeInList(screen: ScreenDataModel) {
         val list = getScreensInList()

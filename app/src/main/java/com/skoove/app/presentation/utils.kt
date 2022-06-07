@@ -5,10 +5,11 @@ import com.skoove.app.R
 import com.skoove.shared.commundomain.ChoicesModel
 import com.skoove.shared.commundomain.ScreenBX.*
 
-fun NavController.redirectToScreenBX(screenName: String) =
+fun NavController.redirectToScreen(screenName: String) =
     when (screenName) {
         SCREENB2.source, SCREENB3.source, SCREENB1.source -> navigate(R.id.action_ScreenAFragment_to_ScreenBXFragment)
-        else -> navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
+        SCREENB2.destination, SCREENB3.destination, SCREENB1.destination ->navigate(R.id.action_ScreenAFragment_to_ScreenCXFragment)
+        else  -> navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
 
     }
 

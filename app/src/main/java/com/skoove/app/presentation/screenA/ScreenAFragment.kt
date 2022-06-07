@@ -4,7 +4,8 @@ package com.skoove.app.presentation.screenA
 import androidx.navigation.fragment.findNavController
 import com.skoove.app.databinding.FragmentScreenaBinding
 import com.skoove.app.di.component.DependenciesInit
-import com.skoove.app.presentation.redirectToScreenBX
+import com.skoove.app.presentation.LauncherActivity
+import com.skoove.app.presentation.redirectToScreen
 import com.skoove.shared.baseui.BaseViewModelFragment
 import com.skoove.shared.commun.extensions.observe
 
@@ -37,7 +38,7 @@ class ScreenAFragment : BaseViewModelFragment<ScreenAViewModel, FragmentScreenaB
         }
     }
 
-    private fun navigateTo() =  findNavController().redirectToScreenBX(sharedPreferences.lastFetchExperiment)
+    private fun navigateTo() =  (activity as LauncherActivity).redirect()
 
 
 }

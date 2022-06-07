@@ -27,6 +27,7 @@
         android:textColor="@android:color/white"
         android:textSize="22sp" />
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/home_nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

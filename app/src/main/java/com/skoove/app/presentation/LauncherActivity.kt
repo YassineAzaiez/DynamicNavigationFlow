@@ -1,7 +1,6 @@
 package com.skoove.app.presentation
 
 
-
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -48,17 +47,23 @@ class LauncherActivity :
 
     private fun onLoginSuccess(sessionId: String) {
         sharedPreferences.sessionId = sessionId
-        redirect()
     }
 
-    private fun redirect() {
+     fun redirect() {
         when {
             sharedPreferences.isFirstLaunch -> {
                 sharedPreferences.isFirstLaunch = false
                 navController.navigate(R.id.ScreenAFragment)
             }
 
-            sharedPreferences.lastFetchExperiment.isNotEmpty() -> navController.redirectToScreenBX(sharedPreferences.lastFetchExperiment)
+            sharedPreferences.lastFetchExperiment.isNotEmpty() && sharedPreferences.getScreensInList()
+                .isEmpty() ->
+                navController.redirectToScreen(sharedPreferences.lastFetchExperiment)
+
+            sharedPreferences.lastFetchExperiment.isNotEmpty() && sharedPreferences.getScreensInList()
+                .isNotEmpty() ->  navController.navigate(R.id.action_ScreenBXFragment_to_ScreenCXFragment)
+            else ->navController.navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
+
 
         }
     }
@@ -75,15 +80,12 @@ class LauncherActivity :
     }
 
 
-    //Setting Up ActionBar with NavController
-    //Pass the Ids of topLevel destinations in AppBarConfiguration
     private fun setupActionBar() {
         setSupportActionBar(binding.activityLauncherToolBar)
         supportActionBar?.apply {
             setDisplayShowTitleEnabled(false)
         }
     }
-
 
 
     private fun onNavigate(dest: NavDestination) {

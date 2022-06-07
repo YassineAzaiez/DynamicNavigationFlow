@@ -12,6 +12,7 @@ class ScreenDFragment : BaseViewModelFragment<MainViewModel, FragmentScreenaBind
 
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
+       sharedPreferences.clearFields()
         disableDefaultBackPress(true)
     }
 

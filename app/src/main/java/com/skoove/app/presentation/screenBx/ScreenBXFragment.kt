@@ -25,6 +25,10 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
     private var action = R.id.action_ScreenBXFragment_to_ScreenCXFragment
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
+        if (sharedPreferences.getScreensInList().isNotEmpty())
+            sharedPreferences.lastFetchExperiment = sharedPreferences.getScreensInList().last().screen
+
+        sharedPreferences.restList()
         ToolbarShared.getInstance().updateTitle(sharedPreferences.lastFetchExperiment)
         disableDefaultBackPress(true)
         setUpViews()
@@ -63,7 +67,8 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
 
         binding.ivNext.setOnClickListener {
             if ((validate && ::selectedOption.isInitialized) &&
-                sharedPreferences.lastFetchExperiment != ScreenBX.SCREENB3.source)
+                sharedPreferences.lastFetchExperiment != ScreenBX.SCREENB3.source
+            )
                 viewModel.submitSelection()
             else
                 findNavController().navigate(action)
