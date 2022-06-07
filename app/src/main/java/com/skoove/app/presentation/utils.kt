@@ -7,17 +7,11 @@ import com.skoove.shared.commundomain.ScreenBX.*
 
 fun NavController.redirectToScreenBX(screenName: String) =
     when (screenName) {
-        SCREENB2.destination, SCREENB3.destination, SCREENB1.destination -> navigate(R.id.action_ScreenAFragment_to_ScreenBXFragment)
-        else -> navigate(R.id.action_ScreenAFragment_to_ScreenC2Fragment2)
+        SCREENB2.source, SCREENB3.source, SCREENB1.source -> navigate(R.id.action_ScreenAFragment_to_ScreenBXFragment)
+        else -> navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
 
     }
 
-fun NavController.redirectToScreenCX(screenName: String) =
-    when (screenName) {
-        SCREENB2.destination, SCREENB3.destination, SCREENB1.destination -> navigate(R.id.action_ScreenAFragment_to_ScreenBXFragment)
-        else -> navigate(R.id.action_ScreenAFragment_to_ScreenC2Fragment2)
-
-    }
 
 
 fun getChoicesList() =

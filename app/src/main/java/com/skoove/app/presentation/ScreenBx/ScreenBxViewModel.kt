@@ -13,8 +13,8 @@ class ScreenBxViewModel @Inject constructor(
     @IoDispatcher ioDispatcher: CoroutineDispatcher
 ) : BaseViewModel(ioDispatcher) {
 
-    private val _onSubmitSelection = MutableLiveData<Pair<Boolean,Int>>()
-    val onSubmitSelection: LiveData<Pair<Boolean,Int>>
+    private val _onSubmitSelection = MutableLiveData<Boolean>()
+    val onSubmitSelection: LiveData<Boolean>
         get() = _onSubmitSelection
-    fun submitSelection(action:Int) { executeUseCase(submitSelection) { _onSubmitSelection.postValue(Pair(it,action)) } }
+    fun submitSelection() { executeUseCase(submitSelection) { _onSubmitSelection.postValue(it) } }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.skoove.shared.commun.AppSharedPreferences
@@ -16,7 +17,7 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflate<VB>) 
     protected lateinit var activity: BaseActivity<*>
     private var _binding: VB? = null
     protected val binding get() = _binding!!
-
+    private var interceptBackClick = false
     protected lateinit var sharedPreferences: AppSharedPreferences
 
 
@@ -41,7 +42,35 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflate: Inflate<VB>) 
 
         activity = context as BaseActivity<*>
         sharedPreferences = activity.sharedPreferences
+
+        activity.onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (interceptBackClick) {
+                    onBackPressCustomAction()
+                } else {
+                    isEnabled = false
+                    activity.onBackPressed()
+                }
+            }
+        })
     }
+
+    /**
+     * Method to override the backPressNative behavior.
+     * If we want to keep default onBackPress           : Don't override method
+     * If we want to disable backPress                  : "disableDefaultBackPress" = true
+     * If we want to add custom action on BackPressed   : "disableDefaultBackPress" = true && override "onBackPressCustomAction()" with custom code inside
+     *
+     */
+
+    open fun onBackPressCustomAction() {
+        // override inside fragment that have a custom backPress action
+    }
+
+    fun disableDefaultBackPress(disable: Boolean) {
+        interceptBackClick = disable
+    }
+
 
 
     protected fun toggleLoading(show: Boolean) {

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.skoove.app.presentation.MainViewModel
 import com.skoove.app.presentation.screenA.ScreenAViewModel
 import com.skoove.app.presentation.screenBx.ScreenBxViewModel
+import com.skoove.app.presentation.screenCx.ScreenCxViewModel
 import com.skoove.shared.di.annotations.ViewModelKey
 import com.skoove.shared.di.viewmodels.DaggerViewModelFactory
 import dagger.Binds
@@ -28,6 +29,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ScreenBxViewModel::class)
     abstract fun bindScreenBXVM(screenBxViewModel: ScreenBxViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ScreenCxViewModel::class)
+    abstract fun bindScreenCXVM(screenCxViewModel: ScreenCxViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory

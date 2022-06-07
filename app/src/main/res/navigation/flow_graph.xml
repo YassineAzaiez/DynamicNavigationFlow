@@ -4,8 +4,8 @@
     android:id="@+id/flow_graph"
     app:startDestination="@id/ScreenAFragment">
     <action
-        android:id="@+id/action_ScreenAFragment_to_ScreenC2Fragment2"
-        app:destination="@id/ScreenC2Fragment" />
+        android:id="@+id/action_ScreenAFragment_to_ScreenCXFragment"
+        app:destination="@id/ScreenCXFragment" />
     <action
         android:id="@+id/action_ScreenAFragment_to_ScreenBXFragment"
         app:destination="@id/ScreenBXFragment" />
@@ -15,39 +15,28 @@
         android:name="com.skoove.app.presentation.screenA.ScreenAFragment"
         android:label="ScreenA" >
 
-
-
     </fragment>
     <fragment
         android:id="@+id/ScreenBXFragment"
         android:name="com.skoove.app.presentation.screenBx.ScreenBXFragment">
+
         <action
-            android:id="@+id/action_ScreenB1Fragment_to_ScreenC1Fragment"
-            app:destination="@id/ScreenC1Fragment" />
-        <action
-            android:id="@+id/action_ScreenB2Fragment_to_ScreenC2Fragment"
-            app:destination="@id/ScreenC2Fragment" />
+            android:id="@+id/action_ScreenBXFragment_to_ScreenCXFragment"
+            app:destination="@id/ScreenCXFragment" />
     </fragment>
 
 
 
     <fragment
-        android:id="@+id/ScreenC1Fragment"
-        android:name="com.skoove.app.presentation.screenCx.ScreenC1Fragment"
-        android:label="ScreenC1" >
+        android:id="@+id/ScreenCXFragment"
+        android:name="com.skoove.app.presentation.screenCx.ScreenCXFragment"
+        >
 
         <action
-            android:id="@+id/action_ScreenC1Fragment_to_ScreenDFragment"
+            android:id="@+id/action_ScreenCxFragment_to_ScreenDFragment"
             app:destination="@id/ScreenDFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/ScreenC2Fragment"
-        android:name="com.skoove.app.presentation.screenCx.ScreenC2Fragment"
-        android:label="ScreenC2" >
-        <action
-            android:id="@+id/action_ScreenC2Fragment_to_ScreenDFragment"
-            app:destination="@id/ScreenDFragment" />
-    </fragment>
+
 
 
     <fragment

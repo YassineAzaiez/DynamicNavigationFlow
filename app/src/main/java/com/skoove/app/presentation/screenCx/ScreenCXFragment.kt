@@ -1,44 +1,60 @@
 package com.skoove.app.presentation.screenCx
 
+
 import androidx.navigation.fragment.findNavController
 import com.skoove.app.R
 import com.skoove.app.databinding.FragmentScreenbxBinding
+import com.skoove.app.databinding.FragmentScreencxBinding
 import com.skoove.app.di.component.DependenciesInit
 import com.skoove.app.presentation.ToolbarShared
-import com.skoove.app.presentation.getChoicesList
-import com.skoove.app.presentation.getOptionsList
+import com.skoove.app.presentation.redirectToScreenBX
+
 import com.skoove.shared.baseui.BaseViewModelFragment
-import com.skoove.shared.commun.extensions.hide
-import com.skoove.shared.commun.extensions.loadColor
+
 import com.skoove.shared.commun.extensions.observe
-import com.skoove.shared.commun.extensions.show
-import com.skoove.shared.commundomain.ChoicesModel
 import com.skoove.shared.commundomain.ScreenBX
+import com.skoove.shared.commundomain.getScreenBxDestination
 
-class ScreenCXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreenbxBinding>(
-    ScreenBxViewModel::class.java,
-    FragmentScreenbxBinding::inflate
+
+class ScreenCXFragment : BaseViewModelFragment<ScreenCxViewModel, FragmentScreencxBinding>(
+    ScreenCxViewModel::class.java,
+    FragmentScreencxBinding::inflate
 ) {
-
-    private var validate = false
+    private lateinit var screenCTitle: String
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
-        ToolbarShared.getInstance().updateTitle(sharedPreferences.lastFetchExperiment)
-
+        screenCTitle = getScreenBxDestination(sharedPreferences.lastFetchExperiment)
+        disableDefaultBackPress(screenCTitle == ScreenBX.SCREENB1.destination)
+        setUpViews()
     }
 
+    override fun onBackPressCustomAction() {
+        viewModel.cancelLogin()
+    }
 
-
-
+    private fun setUpViews() {
+        ToolbarShared.getInstance().updateTitle(screenCTitle)
+        sharedPreferences.getScreensInList().last().also {
+            with(binding) {
+                tvScreenCxTitle.text = it.data.response
+                tvScreenCxContent.text = getString(it.data.choiceText)
+            }
+        }
+        viewModel.login()
+    }
 
 
     override fun initObservers() {
         with(viewModel) {
-            observe(onSubmitSelection) { isSubmitted ->
-                if (isSubmitted.first) findNavController().navigate(isSubmitted.second)
+            observe(onLogin) {
+                findNavController().navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
             }
             observe(onError) {
                 togglePopUp(it)
+            }
+
+            observe(onLoginCanceled) { isCanceled ->
+                if (isCanceled) findNavController().redirectToScreenBX(sharedPreferences.lastFetchExperiment)
             }
         }
     }

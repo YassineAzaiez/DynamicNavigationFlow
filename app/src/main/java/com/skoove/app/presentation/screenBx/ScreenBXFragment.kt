@@ -14,44 +14,46 @@ import com.skoove.shared.commun.extensions.observe
 import com.skoove.shared.commun.extensions.show
 import com.skoove.shared.commundomain.ChoicesModel
 import com.skoove.shared.commundomain.ScreenBX
+import com.skoove.shared.commundomain.ScreenDataModel
 
 class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreenbxBinding>(
     ScreenBxViewModel::class.java,
     FragmentScreenbxBinding::inflate
 ) {
     private var validate = false
-    private var action = -1
+    private lateinit var selectedOption: ChoicesModel
+    private var action = R.id.action_ScreenBXFragment_to_ScreenCXFragment
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
         ToolbarShared.getInstance().updateTitle(sharedPreferences.lastFetchExperiment)
+        disableDefaultBackPress(true)
         setUpViews()
     }
 
     private fun setUpViews() {
-
+        // TODO use strategy pattern
+        // TODO create theme object
         with(binding) {
             when (sharedPreferences.lastFetchExperiment) {
-                ScreenBX.SCREENB1.destination -> {
+
+                ScreenBX.SCREENB1.source -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_F9EBC8))
                     initOptions(getChoicesList())
                     rvOptions.show()
-                    action = R.id.action_ScreenB1Fragment_to_ScreenC1Fragment
                     tvScreenB3Content.hide()
                 }
-                ScreenBX.SCREENB2.destination -> {
+                ScreenBX.SCREENB2.source -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_FFEE63))
                     initOptions(getOptionsList())
                     rvOptions.show()
-                    action = R.id.action_ScreenB2Fragment_to_ScreenC2Fragment
                     tvScreenB3Content.hide()
                 }
 
-                ScreenBX.SCREENB3.destination -> {
+                ScreenBX.SCREENB3.source -> {
                     root.setBackgroundColor(activity.loadColor(R.color.color_ADE498))
                     rvOptions.hide()
                     tvScreenB3Content.show()
                     validate = true
-                    action = R.id.action_ScreenB2Fragment_to_ScreenC2Fragment
                     tvScreenB3Content.text = getString(R.string.screenB3Content)
                 }
 
@@ -60,13 +62,18 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
         }
 
         binding.ivNext.setOnClickListener {
-            if(validate) viewModel.submitSelection(action)
+            if ((validate && ::selectedOption.isInitialized) &&
+                sharedPreferences.lastFetchExperiment != ScreenBX.SCREENB3.source)
+                viewModel.submitSelection()
+            else
+                findNavController().navigate(action)
         }
     }
 
     private fun initOptions(options: List<ChoicesModel>) {
         binding.rvOptions.adapter = ChoicesAdapter(options) {
             validate = it.isChoiceChecked
+            selectedOption = it
         }
 
     }
@@ -75,8 +82,19 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
     override fun initObservers() {
         with(viewModel) {
             observe(onSubmitSelection) { isSubmitted ->
-                if (isSubmitted.first) findNavController().navigate(isSubmitted.second)
+                if (isSubmitted && ::selectedOption.isInitialized) {
+                    sharedPreferences.putScreeInList(
+                        ScreenDataModel(
+                            sharedPreferences.lastFetchExperiment,
+                            selectedOption
+
+                        )
+                    )
+                    findNavController().navigate(action)
+                }
             }
+
+
             observe(onError) {
                 togglePopUp(it)
             }

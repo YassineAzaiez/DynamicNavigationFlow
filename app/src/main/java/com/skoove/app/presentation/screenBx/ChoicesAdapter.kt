@@ -19,7 +19,7 @@ class ChoicesAdapter(
     private val onChoiceSelected: (ChoicesModel) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
+    private var checkedPosition = -1
     override fun getItemCount() = listResponse.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -50,7 +50,7 @@ class ChoicesAdapter(
         private val checkBox = view.ivItemCheckbox
 
         init {
-            checkBox.setOnClickListener {
+            rootView.setOnClickListener {
                 notifyItemChanged(checkedPosition) // to reset the view of the previous selected item
                 checkedPosition = adapterPosition
                 notifyItemChanged(checkedPosition) // to update the view of the newly selected item
@@ -84,7 +84,7 @@ class ChoicesAdapter(
         }
     }
 
-    private var checkedPosition = -1
+
 
     inner class OptionsHolder(view: ItemChoiceBinding) : RecyclerView.ViewHolder(view.root) {
         private val choiceText = view.tvItemContent

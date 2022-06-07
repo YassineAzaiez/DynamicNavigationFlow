@@ -10,6 +10,7 @@ import com.skoove.shared.commundomain.BaseUseCase
 import com.skoove.shared.di.qualifier.IoDispatcher
 import com.skoove.shared.utils.UNEXPECTED_ERROR_MSG
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,22 +32,24 @@ open class BaseViewModel @Inject constructor(
 
     private fun showLoadingToggle(visible: Boolean) = _toggleLoading.postValue(visible)
 
-    private fun onFailure(msg: String?) {
+    protected fun onFailure(msg: String?) {
         showLoadingToggle(false)
         showError(msg ?: UNEXPECTED_ERROR_MSG)
     }
 
-    private fun <T> onSuccess(item: T, onAction: (T) -> Unit) {
+    protected fun <T> onSuccess(item: T, onAction: (T) -> Unit) {
         showLoadingToggle(false)
         onAction(item)
     }
 
     protected fun <T> executeUseCase(
         useCase: BaseUseCase<Flow<ApiResult<T>>>,
+        withDelay: Boolean = false,
         onResult: (T) -> Unit
     ) {
         showLoadingToggle(true)
         viewModelScope.launch(ioDispatcher) {
+            if (withDelay) delay(3000)
             useCase().collect { response ->
                 when (response) {
                     is Success -> {

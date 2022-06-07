@@ -21,8 +21,7 @@ object NetworkModule {
     private const val CONNECT_TIMEOUT = "10"
     private const val WRITE_TIMEOUT = "60"
     private const val READ_TIMEOUT = "30"
-    private const val HEADER_CACHE_CONTROL = "Cache-Control"
-    private const val APP_ID = "app-id"
+
 
     @Provides
     @Singleton
