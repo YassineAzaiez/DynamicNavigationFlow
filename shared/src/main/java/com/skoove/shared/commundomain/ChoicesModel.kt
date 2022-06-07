@@ -5,6 +5,6 @@ import java.io.Serializable
 data class ChoicesModel(
     val response: String,
     var isChoiceChecked: Boolean = false,
-    val hasPic: Boolean,
+    val hasCheckBox: Boolean,
     val choiceText : Int
 ) : Serializable

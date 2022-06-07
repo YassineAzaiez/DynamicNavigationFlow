@@ -34,7 +34,7 @@ class ChoicesAdapter(
         }
 
     override fun getItemViewType(position: Int): Int {
-        return if (listResponse[position].hasPic) ScreenBX.SCREENB2.ordinal else ScreenBX.SCREENB1.ordinal
+        return if (listResponse[position].hasCheckBox) ScreenBX.SCREENB2.ordinal else ScreenBX.SCREENB1.ordinal
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =

@@ -23,7 +23,7 @@ fun <T> Flow<ApiResult<T>>.onFlowStarts() =
 fun <T : Any> Flow<ApiResult<T>>.applyCommonSideEffects() =
     retryWhen { cause, attempt ->
         when {
-            (cause is HttpException && attempt < MAX_RETRIES) -> {
+            (cause is Exception && attempt < MAX_RETRIES) -> {
                 delay(getBackoffDelay(attempt))
                 true
             }

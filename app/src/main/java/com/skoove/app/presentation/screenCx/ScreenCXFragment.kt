@@ -3,7 +3,6 @@ package com.skoove.app.presentation.screenCx
 
 import androidx.navigation.fragment.findNavController
 import com.skoove.app.R
-import com.skoove.app.databinding.FragmentScreenbxBinding
 import com.skoove.app.databinding.FragmentScreencxBinding
 import com.skoove.app.di.component.DependenciesInit
 import com.skoove.app.presentation.ToolbarShared
@@ -24,7 +23,7 @@ class ScreenCXFragment : BaseViewModelFragment<ScreenCxViewModel, FragmentScreen
     override fun initViews() {
         DependenciesInit.appComponent().inject(this)
         screenCTitle = getScreenBxDestination(sharedPreferences.lastFetchExperiment)
-        disableDefaultBackPress(screenCTitle == ScreenBX.SCREENB1.destination)
+        disableDefaultBackPress(screenCTitle.isNotFromScreenB3())
         setUpViews()
     }
 
@@ -36,7 +35,8 @@ class ScreenCXFragment : BaseViewModelFragment<ScreenCxViewModel, FragmentScreen
         ToolbarShared.getInstance().updateTitle(screenCTitle)
         sharedPreferences.getScreensInList().last().also {
             with(binding) {
-                tvScreenCxTitle.text = it.data.response
+
+              if(screenCTitle.isNotFromScreenB3())  tvScreenCxTitle.text = it.data.response
                 tvScreenCxContent.text = getString(it.data.choiceText)
             }
         }
@@ -59,5 +59,5 @@ class ScreenCXFragment : BaseViewModelFragment<ScreenCxViewModel, FragmentScreen
         }
     }
 
-
+    private fun String.isNotFromScreenB3 () = this == ScreenBX.SCREENB1.destination
 }

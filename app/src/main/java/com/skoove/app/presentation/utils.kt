@@ -16,18 +16,18 @@ fun NavController.redirectToScreenBX(screenName: String) =
 
 fun getChoicesList() =
     mutableListOf(
-        ChoicesModel("Choice A", hasPic = false, choiceText = R.string.screenB3Content),
-        ChoicesModel("Choice B", hasPic = false ,choiceText = R.string.screenB3Content),
-        ChoicesModel("Choice C", hasPic = false ,choiceText = R.string.screenB3Content),
-        ChoicesModel("Choice D", hasPic = false,choiceText = R.string.screenB3Content),
-        ChoicesModel("Choice E", hasPic = false,choiceText = R.string.screenB3Content),
+        ChoicesModel("Choice A", hasCheckBox = false, choiceText = R.string.screenB3Content),
+        ChoicesModel("Choice B", hasCheckBox = false ,choiceText = R.string.screenB3Content),
+        ChoicesModel("Choice C", hasCheckBox = false ,choiceText = R.string.screenB3Content),
+        ChoicesModel("Choice D", hasCheckBox = false,choiceText = R.string.screenB3Content),
+        ChoicesModel("Choice E", hasCheckBox = false,choiceText = R.string.screenB3Content),
     )
 
 fun getOptionsList() =
     mutableListOf(
-        ChoicesModel("Option A", hasPic = true,choiceText = R.string.screenB3Content),
-        ChoicesModel("Option B", hasPic = true,choiceText = R.string.screenB3Content),
-        ChoicesModel("Option C", hasPic = true,choiceText = R.string.screenB3Content),
-        ChoicesModel("Option D", hasPic = true,choiceText = R.string.screenB3Content),
-        ChoicesModel("Option E", hasPic = true,choiceText = R.string.screenB3Content),
+        ChoicesModel("Option A", hasCheckBox = true,choiceText = R.string.screenB3Content),
+        ChoicesModel("Option B", hasCheckBox = true,choiceText = R.string.screenB3Content),
+        ChoicesModel("Option C", hasCheckBox = true,choiceText = R.string.screenB3Content),
+        ChoicesModel("Option D", hasCheckBox = true,choiceText = R.string.screenB3Content),
+        ChoicesModel("Option E", hasCheckBox = true,choiceText = R.string.screenB3Content),
     )
