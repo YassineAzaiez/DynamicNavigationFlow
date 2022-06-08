@@ -49,7 +49,7 @@ class LauncherActivity :
         sharedPreferences.sessionId = sessionId
     }
 
-     fun redirect() {
+    fun redirect() {
         when {
             sharedPreferences.isFirstLaunch -> {
                 sharedPreferences.isFirstLaunch = false
@@ -57,12 +57,11 @@ class LauncherActivity :
             }
 
             sharedPreferences.lastFetchExperiment.isNotEmpty() && sharedPreferences.getScreensInList()
-                .isEmpty() ->
-                navController.redirectToScreen(sharedPreferences.lastFetchExperiment)
+                .isEmpty() -> navController.redirectToScreen(sharedPreferences.lastFetchExperiment)
 
             sharedPreferences.lastFetchExperiment.isNotEmpty() && sharedPreferences.getScreensInList()
-                .isNotEmpty() ->  navController.navigate(R.id.action_ScreenBXFragment_to_ScreenCXFragment)
-            else ->navController.navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
+                .isNotEmpty() -> navController.navigate(R.id.action_ScreenBXFragment_to_ScreenCXFragment)
+            else -> navController.navigate(R.id.action_ScreenCxFragment_to_ScreenDFragment)
 
 
         }

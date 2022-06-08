@@ -9,6 +9,7 @@ import com.skoove.app.presentation.ToolbarShared
 import com.skoove.app.presentation.redirectToScreen
 
 import com.skoove.shared.baseui.BaseViewModelFragment
+import com.skoove.shared.commun.extensions.hide
 
 import com.skoove.shared.commun.extensions.observe
 import com.skoove.shared.commundomain.ScreenBX
@@ -34,11 +35,9 @@ class ScreenCXFragment : BaseViewModelFragment<ScreenCxViewModel, FragmentScreen
 
     private fun setUpViews() {
         ToolbarShared.getInstance().updateTitle(screenCTitle)
-        if(screenCTitle.isNotFromScreenB3())
         sharedPreferences.getScreensInList().last().also {
             with(binding) {
-
-               tvScreenCxTitle.text = it.data.response
+                if(screenCTitle.isNotFromScreenB3()) tvScreenCxTitle.text = it.data.response else tvScreenCxTitle.hide()
                 tvScreenCxContent.text = getString(it.data.choiceText)
             }
         }

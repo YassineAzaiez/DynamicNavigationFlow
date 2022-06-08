@@ -35,8 +35,7 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
     }
 
     private fun setUpViews() {
-        // TODO use strategy pattern
-        // TODO create theme object
+
         with(binding) {
             when (sharedPreferences.lastFetchExperiment) {
 
@@ -57,8 +56,16 @@ class ScreenBXFragment : BaseViewModelFragment<ScreenBxViewModel, FragmentScreen
                     root.setBackgroundColor(activity.loadColor(R.color.color_ADE498))
                     rvOptions.hide()
                     tvScreenB3Content.show()
-                    validate = true
                     tvScreenB3Content.text = getString(R.string.screenB3Content)
+                    sharedPreferences.putScreeInList(
+                        ScreenDataModel(
+                            sharedPreferences.lastFetchExperiment,
+                            ChoicesModel("",false,false,R.string.screenB3Content)
+
+                        )
+                    )
+                    validate = true
+
                 }
 
 

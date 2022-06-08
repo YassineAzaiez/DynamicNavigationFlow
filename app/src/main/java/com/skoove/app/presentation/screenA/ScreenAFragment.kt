@@ -34,7 +34,7 @@ class ScreenAFragment : BaseViewModelFragment<ScreenAViewModel, FragmentScreenaB
                 navigateTo()
 
             }
-            observe(onfetchExperiments) { togglePopUp(it) }
+            observe(onError) { togglePopUp(it) }
         }
     }
 
